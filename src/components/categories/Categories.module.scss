@@ -1,0 +1,26 @@
+@import "../../scss/variables.scss";
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  li {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.015em;
+    color: #2c2c2c;
+    
+    cursor: pointer;
+    background: #f4f4f4;
+    border-radius: 30px;
+    padding: 13px 20px
+  }
+
+  .active{
+    background-color: $black;
+    color: $white;
+  }
+}
+
