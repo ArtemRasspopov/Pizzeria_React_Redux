@@ -1,5 +1,6 @@
 //libs
 import React from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Header.module.scss";
 //images
@@ -9,18 +10,18 @@ function Header() {
   return (
     <div className={styles.header}>
       <div>
-        <a className={styles.logo} href={"/"}>
+        <Link to={"/"} className={styles.logo} href={"/"}>
           <img src={logo} alt="logo" />
           <div>
             <h2>react pizza</h2>
             <p>самая вкусная пицца во вселенной</p>
           </div>
-        </a>
+        </Link>
       </div>
-      <button className={styles.button}>
+      <Link to={"cart"} className={styles.button}>
         <div className={styles.sum}>520 ₽</div>
         <div className={styles.count}>3</div>
-      </button>
+      </Link>
     </div>
   );
 }
