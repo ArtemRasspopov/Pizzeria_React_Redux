@@ -14,24 +14,24 @@ import { setCurrentPage } from "../../redux/slices/FilterSlice";
 function Home() {
   const dispatc = useDispatch();
   const { items, status } = useSelector((state) => state.ItemsSlice);
-  const { currentPage } = useSelector(
-    (state) => state.FilterSlice
-  );
-
+  const { currentPage, category, sort } = useSelector((state) => state.FilterSlice);
 
   React.useEffect(() => {
-    getItems(currentPage);
+    const categoryFilter = category > 0 ? `category=${category}` : "";
+    const sortFilter = `sortBy=${sort.sortProperty}`
+    const filters = { currentPage, categoryFilter, sortFilter };
+    getItems(filters);
+
     window.scrollTo(0, 0);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, category, sort]);
 
-  function getItems(currentPage) {
-    dispatc(fetchItems(currentPage));
+  function getItems(filters) {
+    dispatc(fetchItems(filters));
   }
 
   function onChangePage(pageIndex) {
-    dispatc(setCurrentPage(pageIndex))
+    dispatc(setCurrentPage(pageIndex));
   }
 
   return (
@@ -46,18 +46,21 @@ function Home() {
         {status === "error" ? (
           <NotFoundItems />
         ) : (
-          <ul className={styles.itemsList}>
-            {status === "loading"
-              ? [...new Array(6)].map((_, index) => (
-                  <PizzaBlockSkeleton key={index} />
-                ))
-              : items.map((item) => {
-                  return <ProductItem key={item.id} {...item} />;
-                })}
-          </ul>
+          <>
+            <ul className={styles.itemsList}>
+              {status === "loading"
+                ? [...new Array(6)].map((_, index) => (
+                    <PizzaBlockSkeleton key={index} />
+                  ))
+                : items.map((item) => {
+                    return <ProductItem key={item.id} {...item} />;
+                  })}
+            </ul>
+            <Paginate onChangePage={onChangePage} />
+          </>
         )}
       </div>
-      {status === "success" && <Paginate onChangePage={onChangePage} />}
+      {/* {status === "success" && <Paginate onChangePage={onChangePage} />} */}
     </div>
   );
 }
