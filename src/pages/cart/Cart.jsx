@@ -1,34 +1,54 @@
-import React from 'react'
-import Header from '../../components/header/Header'
-import styles from './Cart.module.scss'
-import CartItem from './CartItem'
+import React from "react";
+//components
+import Header from "../../components/header/Header";
+import CartItem from "./CartItem";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../../redux/slices/CartSlice";
+//styles
+import styles from "./Cart.module.scss";
+import { Link } from "react-router-dom";
 
 function Cart() {
+  const { totalPrice, cartItems, quantity } = useSelector(
+    (state) => state.CartSlice
+  );
+  const dispatch = useDispatch();
+
+  function clearAllOnClick() {
+    dispatch(clearCart());
+  }
+
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
       <div className={styles.cart}>
         <div className={styles.cartTop}>
           <h2>Корзина</h2>
-          <button>Отчистить корзину</button>
+          <button onClick={clearAllOnClick}>Отчистить корзину</button>
         </div>
         <ul className={styles.itemsList}>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cartItems.map((item, index) => (
+            <CartItem key={index} item={item} />
+          ))}
         </ul>
         <div className={styles.info}>
-          <p className={styles.count}>Всего пицц: <span>3 шт.</span></p>
-          <p className={styles.sum}>Сумма заказа: <span>900 ₽</span></p>
+          <p className={styles.count}>
+            Всего пицц: <span>{quantity} шт.</span>
+          </p>
+          <p className={styles.sum}>
+            Сумма заказа: <span>{totalPrice} ₽</span>
+          </p>
         </div>
         <div className={styles.bottom}>
-          <button className={styles.goBack}>Вернуться назад</button>
+          <Link to={"/"} className={styles.goBack}>
+            Вернуться назад
+          </Link>
           <button className={styles.by}>Оплатить сейчас</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

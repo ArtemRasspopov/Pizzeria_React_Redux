@@ -1,15 +1,19 @@
 import React from "react";
+//redux
 import { useDispatch, useSelector } from "react-redux";
+//reducers
+import { fetchItems } from "../../redux/slices/ItemsSlice";
+import { setCurrentPage } from "../../redux/slices/FilterSlice";
+//components
 import Categories from "../../components/categories/Categories";
 import Header from "../../components/header/Header";
 import Paginate from "../../components/paginate/Paginate";
 import ProductItem from "../../components/productItem/ProductItem";
-import PizzaBlockSkeleton from "../../components/productItem/ProductItemSkelleton";
+import ItemBlockSkeleton from "../../components/productItem/ProductItemSkelleton";
 import Sort from "../../components/sort/Sort";
-import { fetchItems } from "../../redux/slices/ItemsSlice";
-import styles from "./home.module.scss";
 import NotFoundItems from "../notFound/NotFoundItems";
-import { setCurrentPage } from "../../redux/slices/FilterSlice";
+//stiles
+import styles from "./home.module.scss";
 
 function Home() {
   const dispatc = useDispatch();
@@ -20,6 +24,7 @@ function Home() {
     const categoryFilter = category > 0 ? `category=${category}` : "";
     const sortFilter = `sortBy=${sort.sortProperty}`
     const filters = { currentPage, categoryFilter, sortFilter };
+
     getItems(filters);
 
     window.scrollTo(0, 0);
@@ -50,17 +55,16 @@ function Home() {
             <ul className={styles.itemsList}>
               {status === "loading"
                 ? [...new Array(6)].map((_, index) => (
-                    <PizzaBlockSkeleton key={index} />
+                    <ItemBlockSkeleton key={index} />
                   ))
                 : items.map((item) => {
-                    return <ProductItem key={item.id} {...item} />;
+                    return <ProductItem key={item.id} itemObject={item} />;
                   })}
             </ul>
             <Paginate onChangePage={onChangePage} />
           </>
         )}
       </div>
-      {/* {status === "success" && <Paginate onChangePage={onChangePage} />} */}
     </div>
   );
 }

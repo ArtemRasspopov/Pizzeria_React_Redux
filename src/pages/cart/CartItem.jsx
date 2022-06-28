@@ -1,8 +1,34 @@
 import React from "react";
-import styles from './Cart.module.scss'
-import crossImage from '../../assets/images/cross.svg'
+import styles from "./Cart.module.scss";
+import crossImage from "../../assets/images/cross.svg";
+//redux
+import { useDispatch } from "react-redux";
+import {
+  addCartItems,
+  minusItem,
+  removeItem,
+} from "../../redux/slices/CartSlice";
 
-function CartItem() {
+function CartItem({ item }) {
+  const dispatch = useDispatch();
+  const typesNames = ["Тонкое", "Традиционное"];
+
+  function removeItemOnClick() {
+    dispatch(removeItem(item));
+  }
+
+  function countPlusClick() {
+    dispatch(addCartItems(item));
+  }
+
+  function countMinusClick() {
+    if (item.count > 1) {
+      dispatch(minusItem(item));
+    } else {
+      dispatch(removeItem(item));
+    }
+  }
+
   return (
     <div className={styles.cartItem}>
       <img
@@ -13,16 +39,18 @@ function CartItem() {
         alt="Pizza"
       />
       <div className={styles.title}>
-        <h3>Чизбургер-пицца</h3>
-        <p>тонкое тесто, 30 см.</p>
+        <h3>{item.title}</h3>
+        <p>
+          {typesNames[item.types]} тесто, {item.sizes} см.
+        </p>
       </div>
       <div className={styles.countButtons}>
-        <button>-</button>
-        <p>2</p>
-        <button>+</button>
+        <button onClick={countMinusClick}>-</button>
+        <p>{item.count}</p>
+        <button onClick={countPlusClick}>+</button>
       </div>
-      <p className={styles.sum}>350 ₽</p>
-      <button className={styles.deleteItem}>
+      <p className={styles.sum}>{item.sumPrice} ₽</p>
+      <button className={styles.deleteItem} onClick={removeItemOnClick}>
         <img src={crossImage} alt="cross" />
       </button>
     </div>
