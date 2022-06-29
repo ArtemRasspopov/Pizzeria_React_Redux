@@ -1,0 +1,41 @@
+@import "../../scss/variables.scss";
+
+.serch {
+  display: flex;
+  align-items: center;
+  margin-left: 100px;
+  margin-right: auto;
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+  
+  button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: 10px;
+    background-color: transparent;
+    width: 30px;
+    border: 1px solid $gray;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover{
+      border-color: $orange;
+
+      svg{
+        path{
+          fill: orange;
+        }
+      }
+    }
+  }
+}
+
+.serchInput {
+  flex-grow: 1;
+  padding: 7px 50px 7px 10px;
+  border: 1px solid $gray;
+  border-radius: 5px;
+}

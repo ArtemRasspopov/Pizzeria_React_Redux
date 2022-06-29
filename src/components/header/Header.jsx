@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import styles from "./Header.module.scss";
 //images
 import logo from "../../assets/images/logo.svg";
+import Search from "../search/Search";
 
 function Header() {
-
-  const {totalPrice, quantity} = useSelector(state => state.CartSlice)
+  const { totalPrice, quantity } = useSelector((state) => state.CartSlice);
 
   return (
     <div className={styles.header}>
@@ -22,6 +22,7 @@ function Header() {
           </div>
         </Link>
       </div>
+      <Search />
       <Link to={"/cart"} className={styles.button}>
         <div className={styles.sum}>{totalPrice} ₽</div>
         <div className={styles.count}>{quantity}</div>

@@ -53,7 +53,6 @@ export const CartSlice = createSlice({
           obj.types === action.payload.types &&
           obj.sizes === action.payload.sizes
       );
-      console.log(findItem.price);
       state.totalPrice -= findItem.price;
       state.quantity--;
       findItem.sumPrice -= findItem.price;

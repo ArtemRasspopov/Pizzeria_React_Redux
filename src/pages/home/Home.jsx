@@ -1,7 +1,6 @@
 import React from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-//reducers
 import { fetchItems } from "../../redux/slices/ItemsSlice";
 import { setCurrentPage } from "../../redux/slices/FilterSlice";
 //components
@@ -18,18 +17,22 @@ import styles from "./home.module.scss";
 function Home() {
   const dispatc = useDispatch();
   const { items, status } = useSelector((state) => state.ItemsSlice);
-  const { currentPage, category, sort } = useSelector((state) => state.FilterSlice);
+  const { currentPage, category, sort } = useSelector(
+    (state) => state.FilterSlice
+  );
+  const { serchValue } = useSelector((state) => state.SerchSlice);
 
   React.useEffect(() => {
     const categoryFilter = category > 0 ? `category=${category}` : "";
-    const sortFilter = `sortBy=${sort.sortProperty}`
-    const filters = { currentPage, categoryFilter, sortFilter };
+    const sortFilter = `sortBy=${sort.sortProperty}`;
+    const serch = `search=${serchValue.trim()}`;
+    const filters = { currentPage, categoryFilter, sortFilter, serch };
 
     getItems(filters);
 
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, category, sort]);
+  }, [currentPage, category, sort, serchValue]);
 
   function getItems(filters) {
     dispatc(fetchItems(filters));
