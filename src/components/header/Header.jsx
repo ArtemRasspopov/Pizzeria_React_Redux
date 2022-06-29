@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 //redux
 import { useSelector } from "react-redux";
 //styles
@@ -10,6 +11,7 @@ import Search from "../search/Search";
 
 function Header() {
   const { totalPrice, quantity } = useSelector((state) => state.CartSlice);
+  const location = useLocation()
 
   return (
     <div className={styles.header}>
@@ -22,7 +24,8 @@ function Header() {
           </div>
         </Link>
       </div>
-      <Search />
+      {location.pathname !== '/cart' && <Search />}
+      
       <Link to={"/cart"} className={styles.button}>
         <div className={styles.sum}>{totalPrice} ₽</div>
         <div className={styles.count}>{quantity}</div>

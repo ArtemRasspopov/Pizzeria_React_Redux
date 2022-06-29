@@ -22,6 +22,7 @@ function Home() {
   );
   const { serchValue } = useSelector((state) => state.SerchSlice);
 
+
   React.useEffect(() => {
     const categoryFilter = category > 0 ? `category=${category}` : "";
     const sortFilter = `sortBy=${sort.sortProperty}`;
@@ -33,6 +34,7 @@ function Home() {
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, category, sort, serchValue]);
+
 
   function getItems(filters) {
     dispatc(fetchItems(filters));
