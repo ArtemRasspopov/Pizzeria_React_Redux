@@ -89,3 +89,29 @@
     background-repeat: no-repeat;
   }
 }
+
+@media (max-width: 1150px){
+  .logo{
+    h2{
+      font-size: 20px;
+      line-height: 27px;
+    }
+    p{
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 600px){
+  .header{
+    flex-direction: column;
+    gap: 30px;
+
+    &::before{
+      left: 0;
+      right: 0;
+    }
+  }
+
+
+}

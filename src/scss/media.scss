@@ -3,3 +3,11 @@
     margin: 30px;
   }
 }
+
+@media (max-width: 600px){
+ .container{
+  padding: 10px;
+  margin: 0;
+ }
+}
+

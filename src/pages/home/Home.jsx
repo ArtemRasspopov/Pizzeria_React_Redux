@@ -10,7 +10,7 @@ import Paginate from "../../components/paginate/Paginate";
 import ProductItem from "../../components/productItem/ProductItem";
 import ItemBlockSkeleton from "../../components/productItem/ProductItemSkelleton";
 import Sort from "../../components/sort/Sort";
-import NotFoundItems from "../notFound/NotFoundItems";
+import NotFoundItems from "../../components/notFound/NotFoundItems";
 //stiles
 import styles from "./home.module.scss";
 

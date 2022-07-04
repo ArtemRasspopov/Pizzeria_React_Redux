@@ -21,6 +21,7 @@
     letter-spacing: 0.01em;
     color: $black;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   p {
@@ -47,4 +48,12 @@
   border-radius: 30px;
   padding: 14px 40px;
   cursor: pointer;
+}
+
+@media (max-width: 600px){
+  .notFound{
+    img{
+      max-width: 200px;
+    }
+  }
 }

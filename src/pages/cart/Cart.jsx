@@ -2,7 +2,7 @@ import React from "react";
 //components
 import Header from "../../components/header/Header";
 import CartItem from "./CartItem";
-import NotFoundCart from "../notFound/NotFoundCart";
+import NotFoundCart from "../../components/notFound/NotFoundCart";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../../redux/slices/CartSlice";

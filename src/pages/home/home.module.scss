@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
+  max-width: 100%;
 }
 
 .title {
@@ -23,4 +24,25 @@
   row-gap: 50px;
   column-gap: 20px;
   margin-bottom: 80px;
+}
+
+@media (max-width: 1150px){
+  .menu{
+    flex-direction: column;
+    row-gap: 30px;
+  }
+
+  .itemsList{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 740px){
+  .itemsList{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 600px){
+ 
 }

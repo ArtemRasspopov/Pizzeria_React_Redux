@@ -39,3 +39,16 @@
   border: 1px solid $gray;
   border-radius: 5px;
 }
+
+
+@media (max-width: 1150px){
+  .serch{
+    margin-left: 30px;
+  }
+}
+
+@media (max-width: 900px){
+  .serch{
+    display: none;
+  }
+}
