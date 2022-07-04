@@ -1,4 +1,4 @@
-import debounce from "lodash.debounce";
+// import debounce from "lodash.debounce";
 import React from "react";
 import styles from "./Search.module.scss";
 import { useDispatch } from "react-redux/es/exports";
@@ -8,22 +8,14 @@ function Search() {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState("");
 
-  const uppdateSerchValue = React.useCallback(
-    debounce((string) => {
-      console.log(string);
-      dispatch(setSerchValue(string));
-    }, 1000),
-    []
-  );
-
   function serchChange(value) {
     setValue(value);
-    uppdateSerchValue(value);
+    dispatch(setSerchValue(value));
   }
 
   function resetValue() {
-    setValue('')
-    dispatch(setSerchValue(''));
+    setValue("");
+    dispatch(setSerchValue(""));
   }
 
   return (
